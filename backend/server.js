@@ -71,20 +71,20 @@ app.use('/api/admin', require('./routes/admin'));
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-/* ------------------------------------------------------------ DÉMARRAGE */
-const server = app.listen(PORT, () => {
-  console.log(`✅ API Mojo Malado — port ${PORT}`);
-  console.log(`   Prestataire de paiement : ${process.env.PAYMENT_PROVIDER || 'aucun (transfert manuel)'}`);
-  console.log(`   Origines autorisées     : ${allowed.length ? allowed.join(', ') : 'toutes (mode développement)'}`);
-});
-
-/* Arrêt propre : Render envoie SIGTERM avant de couper le conteneur. */
-for (const signal of ['SIGTERM', 'SIGINT']) {
-  process.on(signal, () => {
-    console.log(`\n${signal} reçu — arrêt en cours…`);
-    server.close(() => pool.end().then(() => process.exit(0)));
-    setTimeout(() => process.exit(1), 10000).unref();
+if (require.main === module || !process.env.VERCEL) {
+  const server = app.listen(PORT, () => {
+    console.log(`✅ API Mojo Malado — port ${PORT}`);
+    console.log(`   Prestataire de paiement : ${process.env.PAYMENT_PROVIDER || 'aucun (transfert manuel)'}`);
+    console.log(`   Origines autorisées     : ${allowed.length ? allowed.join(', ') : 'toutes (mode développement)'}`);
   });
+
+  for (const signal of ['SIGTERM', 'SIGINT']) {
+    process.on(signal, () => {
+      console.log(`\n${signal} reçu — arrêt en cours…`);
+      server.close(() => pool.end().then(() => process.exit(0)));
+      setTimeout(() => process.exit(1), 10000).unref();
+    });
+  }
 }
 
 module.exports = app;

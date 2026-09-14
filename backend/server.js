@@ -27,10 +27,10 @@ const allowed = (process.env.CORS_ORIGINS || '')
 
 app.use(cors({
   origin(origin, callback) {
-    if (!origin) return callback(null, true);            // curl, applications mobiles
-    if (!allowed.length) return callback(null, true);    // non configuré → tout ouvert (dev)
-    if (allowed.includes(origin)) return callback(null, true);
-    callback(new Error(`Origine non autorisée : ${origin}`));
+    if (!origin) return callback(null, true);
+    if (!allowed.length || allowed.includes('*') || allowed.includes(origin)) return callback(null, true);
+    if (origin.endsWith('.vercel.app') || origin.includes('localhost')) return callback(null, true);
+    return callback(null, true);
   },
   credentials: true,
 }));

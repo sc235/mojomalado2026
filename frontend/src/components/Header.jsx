@@ -10,8 +10,8 @@ const LINKS = [
   { to: '/boutique?categorie=vetements', label: 'Vêtements' },
   { to: '/boutique?categorie=sacs', label: 'Sacs' },
   { to: '/boutique?categorie=parfums', label: 'Parfums' },
-  { to: '/boutique?categorie=accessoires-filles', label: 'Filles' },
-  { to: '/boutique?categorie=accessoires-garcons', label: 'Garçons' },
+  { to: '/boutique?categorie=accessoires-femmes', label: 'Femmes' },
+  { to: '/boutique?categorie=accessoires-hommes', label: 'Hommes' },
   { to: '/suivi', label: 'Suivre ma commande' },
   { to: '/contact', label: 'Contact' },
 ];

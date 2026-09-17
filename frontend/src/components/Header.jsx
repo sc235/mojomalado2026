@@ -10,6 +10,8 @@ const LINKS = [
   { to: '/boutique?categorie=vetements', label: 'Vêtements' },
   { to: '/boutique?categorie=sacs', label: 'Sacs' },
   { to: '/boutique?categorie=parfums', label: 'Parfums' },
+  { to: '/boutique?categorie=accessoires-filles', label: 'Filles' },
+  { to: '/boutique?categorie=accessoires-garcons', label: 'Garçons' },
   { to: '/suivi', label: 'Suivre ma commande' },
   { to: '/contact', label: 'Contact' },
 ];
@@ -87,7 +89,7 @@ export default function Header() {
           </Link>
 
           <nav className="main-nav" aria-label="Navigation principale">
-            {LINKS.slice(0, 5).map((link) => (
+            {LINKS.slice(0, 7).map((link) => (
               <Link
                 key={link.to}
                 to={link.to}

@@ -9,8 +9,6 @@ const SIZE_PRESETS = {
   'Sandales': ['37', '38', '39', '40', '41'],
   'Parfums': ['100 ml', '250 ml'],
   'Sacs': [],
-  'Accessoires Femmes': ['Taille Unique', 'Ajustable'],
-  'Accessoires Hommes': ['Taille Unique', 'Ajustable'],
 };
 
 const emptyProduct = {

@@ -18,8 +18,6 @@ const CATEGORIES = [
   { name: 'Sacs',      description: 'Sacs à main et modèles créateurs',    image: '/sac.images/yslBag.jpg',      position: 2 },
   { name: 'Parfums',   description: 'Brumes et fragrances longue tenue',   image: '/parfum.images/victoria.jpg', position: 3 },
   { name: 'Sandales',  description: 'Sandales et chaussures',              image: null,                          position: 4 },
-  { name: 'Accessoires Femmes', description: 'Bijoux, foulards, barrettes et accessoires chic pour femmes', image: '/images/accessoires-femmes.jpg', position: 5 },
-  { name: 'Accessoires Hommes', description: 'Montres, bracelets, casquettes et accessoires raffinés pour hommes', image: '/images/accessoires-hommes.jpg', position: 6 },
 ];
 
 /* Déclinaisons générées selon la catégorie. */
@@ -28,8 +26,6 @@ const VARIANT_PLAN = {
   'Sandales':  { sizes: ['37', '38', '39', '40', '41'], stock: [2, 3, 3, 2, 1] },
   'Parfums':   { sizes: ['100 ml', '250 ml'], stock: [8, 4] },
   'Sacs':      { sizes: [null], stock: [3] },
-  'Accessoires Femmes': { sizes: ['Taille Unique'], stock: [8] },
-  'Accessoires Hommes': { sizes: ['Taille Unique'], stock: [8] },
 };
 
 /* Couleur déduite du nom, quand elle y figure. */

@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { catalog, SHOP } from '../lib/api';
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard';
 import Reveal from '../components/Reveal';
 import Seo, { siteOrigin } from '../components/Seo';
 
 export default function Home() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [newest, setNewest] = useState([]);

@@ -1,19 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../contexts/CartContext';
-import { formatPrice, imageUrl } from '../lib/format';
+import { useCurrency } from '../contexts/CurrencyContext';
+import { imageUrl } from '../lib/format';
 import { SHOP } from '../lib/api';
 
-/* ============================================================================
-   Tiroir panier.
-
-   Il ne sert plus qu'à consulter et ajuster le panier : la saisie de l'adresse
-   et le choix du paiement se font sur /commande, en pleine page. Un tunnel
-   d'achat entier dans une colonne de 380 pixels décourageait la validation,
-   surtout au téléphone.
-   ========================================================================== */
-
 export default function Cart() {
+  const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const {
     cart, subtotal, cartCount, shippingFor,
     removeFromCart, updateQuantity, isCartOpen, setIsCartOpen,
@@ -33,10 +28,10 @@ export default function Cart() {
   return (
     <>
       <div className="drawer-backdrop" onClick={close} />
-      <aside className="drawer" role="dialog" aria-modal="true" aria-label="Panier">
+      <aside className="drawer" role="dialog" aria-modal="true" aria-label={t('cart.title')}>
         <div className="drawer-head">
           <div>
-            <h2>Votre panier</h2>
+            <h2>{t('cart.title')}</h2>
             <p>{cartCount} article{cartCount > 1 ? 's' : ''}</p>
           </div>
           <button type="button" className="icon-btn" onClick={close} aria-label="Fermer le panier">
@@ -48,9 +43,9 @@ export default function Cart() {
           {cart.length === 0 ? (
             <div className="empty-state">
               <i className="fas fa-bag-shopping" aria-hidden="true" />
-              <h3>Votre panier est vide</h3>
+              <h3>{t('cart.empty')}</h3>
               <p>Découvrez nos robes, sacs et parfums sélectionnés à Dakar.</p>
-              <Link to="/boutique" className="btn" onClick={close}>Voir la collection</Link>
+              <Link to="/boutique" className="btn" onClick={close}>{t('cart.continueShopping')}</Link>
             </div>
           ) : (
             <>
@@ -102,20 +97,18 @@ export default function Cart() {
         {cart.length > 0 && (
           <div className="drawer-foot">
             <div className="summary-row">
-              <span>Sous-total</span><span>{formatPrice(subtotal)}</span>
+              <span>{t('cart.subtotal')}</span><span>{formatPrice(subtotal)}</span>
             </div>
-            {/* Le montant définitif dépend de la ville et d'un éventuel code
-                promo : il est calculé à l'étape suivante, pas ici. */}
             <p className="field-hint" style={{ marginTop: 2, marginBottom: 12 }}>
-              Livraison et code promo calculés à l'étape suivante.
+              {t('cart.calculatedAtCheckout')}
             </p>
 
             <button type="button" className="btn btn-primary btn-block" onClick={checkout}>
-              Passer la commande <i className="fas fa-arrow-right" aria-hidden="true" />
+              {t('cart.checkout')} <i className="fas fa-arrow-right" aria-hidden="true" />
             </button>
             <button type="button" className="btn btn-ghost btn-block btn-sm"
               style={{ marginTop: 8 }} onClick={close}>
-              Continuer mes achats
+              {t('cart.continueShopping')}
             </button>
           </div>
         )}

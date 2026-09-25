@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../contexts/CartContext';
-import { formatPrice, imageUrl } from '../lib/format';
+import { useCurrency } from '../contexts/CurrencyContext';
+import { imageUrl } from '../lib/format';
 
 export default function ProductCard({ product, badge }) {
+  const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const { toggleWishlist, isInWishlist } = useCart();
   const fav = isInWishlist(product.id);
   const stock = Number(product.stock ?? 0);
@@ -16,9 +20,9 @@ export default function ProductCard({ product, badge }) {
     <article className={`product-card ${soldOut ? 'is-sold-out' : ''}`}>
       <div className="product-media">
         {soldOut ? (
-          <span className="product-tag">Épuisé</span>
+          <span className="product-tag">{t('shop.outOfStock')}</span>
         ) : lowStock ? (
-          <span className="product-tag tag-accent">Dernières pièces</span>
+          <span className="product-tag tag-accent">{t('shop.lastPieces')}</span>
         ) : badge ? (
           <span className={`product-tag ${badge.accent ? 'tag-accent' : ''}`}>{badge.label}</span>
         ) : null}
@@ -39,7 +43,7 @@ export default function ProductCard({ product, badge }) {
 
         <div className="product-quick">
           <Link to={to} className="quick-btn">
-            <i className="fas fa-eye" aria-hidden="true" /> {soldOut ? 'Voir le produit' : 'Choisir la taille'}
+            <i className="fas fa-eye" aria-hidden="true" /> {soldOut ? t('shop.viewDetails') : t('product.selectSize')}
           </Link>
         </div>
       </div>

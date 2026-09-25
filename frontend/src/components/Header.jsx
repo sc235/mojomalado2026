@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useCurrency } from '../contexts/CurrencyContext';
+import I18nSelectors from './I18nSelectors';
 import { SHOP, getToken } from '../lib/api';
-
-const LINKS = [
-  { to: '/', label: 'Accueil' },
-  { to: '/boutique', label: 'Boutique' },
-  { to: '/boutique?categorie=vetements', label: 'Vêtements' },
-  { to: '/boutique?categorie=sacs', label: 'Sacs' },
-  { to: '/boutique?categorie=parfums', label: 'Parfums' },
-  { to: '/suivi', label: 'Suivre ma commande' },
-  { to: '/contact', label: 'Contact' },
-];
 
 function isCurrent(link, location) {
   const [path, query = ''] = link.to.split('?');
@@ -23,6 +16,8 @@ function isCurrent(link, location) {
 }
 
 export default function Header() {
+  const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const { cartCount, wishlist, setIsCartOpen, setIsWishlistOpen } = useCart();
   const { customer, logout } = useAuth();
   const location = useLocation();
@@ -32,6 +27,16 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+
+  const LINKS = [
+    { to: '/', label: t('nav.home') },
+    { to: '/boutique', label: t('nav.shop') },
+    { to: '/boutique?categorie=vetements', label: t('nav.clothes') },
+    { to: '/boutique?categorie=sacs', label: t('nav.bags') },
+    { to: '/boutique?categorie=parfums', label: t('nav.perfumes') },
+    { to: '/suivi', label: t('nav.track') },
+    { to: '/contact', label: t('nav.contact') },
+  ];
 
   useEffect(() => {
     const saved = localStorage.getItem('theme');
@@ -71,9 +76,9 @@ export default function Header() {
   return (
     <>
       <div className="announce-bar">
-        <span>Livraison offerte dès {SHOP.freeShippingFrom.toLocaleString('fr-FR')} FCFA</span>
+        <span>{t('announce.freeShipping', { amount: formatPrice(SHOP.freeShippingFrom) })}</span>
         <span aria-hidden="true">·</span>
-        <span>Wave · Orange Money · Carte bancaire</span>
+        <span>{t('announce.payments')}</span>
       </div>
 
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
@@ -100,13 +105,16 @@ export default function Header() {
           </nav>
 
           <div className="header-actions">
+            {/* Multi-language and Multi-currency selectors */}
+            <I18nSelectors />
+
             <button type="button" className="icon-btn" onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Thème clair' : 'Thème sombre'}>
               <i className={theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'} aria-hidden="true" />
             </button>
 
             {getToken('admin') && (
-              <Link to="/gestion-mojo-privee" className="icon-btn" aria-label="Administration" title="Administration">
+              <Link to="/gestion-mojo-privee" className="icon-btn" aria-label={t('nav.admin')} title={t('nav.admin')}>
                 <i className="fas fa-cog" aria-hidden="true" />
               </Link>
             )}
@@ -117,7 +125,7 @@ export default function Header() {
                 className="icon-btn"
                 onClick={(e) => { e.stopPropagation(); setAccountOpen((v) => !v); }}
                 aria-expanded={accountOpen}
-                aria-label="Mon compte"
+                aria-label={t('nav.account')}
               >
                 <i className="far fa-user" aria-hidden="true" />
               </button>
@@ -130,22 +138,22 @@ export default function Header() {
                         <strong>{customer.fullName}</strong>
                         <span>{customer.email}</span>
                       </div>
-                      <Link to="/compte" role="menuitem"><i className="far fa-user" aria-hidden="true" /> Mon profil</Link>
-                      <Link to="/compte/commandes" role="menuitem"><i className="fas fa-box" aria-hidden="true" /> Mes commandes</Link>
-                      <Link to="/suivi" role="menuitem"><i className="fas fa-truck" aria-hidden="true" /> Suivre une commande</Link>
+                      <Link to="/compte" role="menuitem"><i className="far fa-user" aria-hidden="true" /> {t('nav.profile')}</Link>
+                      <Link to="/compte/commandes" role="menuitem"><i className="fas fa-box" aria-hidden="true" /> {t('nav.myOrders')}</Link>
+                      <Link to="/suivi" role="menuitem"><i className="fas fa-truck" aria-hidden="true" /> {t('nav.track')}</Link>
                       <button type="button" role="menuitem" onClick={() => { logout(); navigate('/'); }}>
-                        <i className="fas fa-arrow-right-from-bracket" aria-hidden="true" /> Se déconnecter
+                        <i className="fas fa-arrow-right-from-bracket" aria-hidden="true" /> {t('nav.logout')}
                       </button>
                     </>
                   ) : (
                     <>
                       <div className="account-menu-head">
-                        <strong>Bienvenue</strong>
-                        <span>Suivez vos commandes en un clic</span>
+                        <strong>{t('nav.welcome')}</strong>
+                        <span>{t('nav.trackSub')}</span>
                       </div>
-                      <Link to="/connexion" role="menuitem"><i className="fas fa-right-to-bracket" aria-hidden="true" /> Se connecter</Link>
-                      <Link to="/inscription" role="menuitem"><i className="fas fa-user-plus" aria-hidden="true" /> Créer un compte</Link>
-                      <Link to="/suivi" role="menuitem"><i className="fas fa-truck" aria-hidden="true" /> Suivre une commande</Link>
+                      <Link to="/connexion" role="menuitem"><i className="fas fa-right-to-bracket" aria-hidden="true" /> {t('nav.login')}</Link>
+                      <Link to="/inscription" role="menuitem"><i className="fas fa-user-plus" aria-hidden="true" /> {t('nav.register')}</Link>
+                      <Link to="/suivi" role="menuitem"><i className="fas fa-truck" aria-hidden="true" /> {t('nav.track')}</Link>
                     </>
                   )}
                 </div>
@@ -174,6 +182,7 @@ export default function Header() {
 
       {menuOpen && (
         <div className="mobile-menu">
+          <I18nSelectors isMobile={true} />
           {LINKS.map((link) => (
             <Link key={link.to} to={link.to}>
               {link.label}
@@ -181,13 +190,13 @@ export default function Header() {
             </Link>
           ))}
           <Link to={customer ? '/compte' : '/connexion'}>
-            {customer ? 'Mon compte' : 'Se connecter'}
+            {customer ? t('nav.account') : t('nav.login')}
             <i className="fas fa-arrow-right" aria-hidden="true" />
           </Link>
           <div className="mobile-menu-footer">
             <a className="btn btn-wa btn-block" href={`https://wa.me/${SHOP.whatsapp}`}
               target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-whatsapp" aria-hidden="true" /> Commander sur WhatsApp
+              <i className="fab fa-whatsapp" aria-hidden="true" /> {t('nav.waOrder')}
             </a>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{SHOP.address}</p>
           </div>

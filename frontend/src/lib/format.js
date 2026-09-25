@@ -1,10 +1,16 @@
-/** Formatage des prix, images et notes. */
-
 const nf = new Intl.NumberFormat('fr-FR');
 
-/** 15000 → "15 000 FCFA" */
-export function formatPrice(value) {
+/** 15000 → "15 000 FCFA" (ou avec conversion si spécifié) */
+export function formatPrice(value, currencyCode = 'XOF') {
   const n = Number(value) || 0;
+  if (currencyCode === 'EUR') {
+    const converted = n * 0.00152449;
+    return `${converted.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+  }
+  if (currencyCode === 'USD') {
+    const converted = n * 0.00166667;
+    return `$${converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  }
   return `${nf.format(n)} FCFA`;
 }
 

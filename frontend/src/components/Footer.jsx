@@ -50,7 +50,7 @@ export default function Footer() {
           <div className="footer-grid">
             <div className="footer-brand">
               <img src="/logo-modjo.jpg" alt="Logo Mojo Malado" />
-              <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: 'var(--text-main)' }}>
+              <p>
                 Own your roots,<br />wear your culture.
               </p>
               <p>Mode africaine contemporaine, sacs, sandales et parfums — sélectionnés pièce par pièce à Dakar.</p>

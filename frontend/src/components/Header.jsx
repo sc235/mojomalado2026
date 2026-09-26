@@ -28,16 +28,6 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
 
-  const LINKS = [
-    { to: '/', label: t('nav.home') },
-    { to: '/boutique', label: t('nav.shop') },
-    { to: '/boutique?categorie=vetements', label: t('nav.clothes') },
-    { to: '/boutique?categorie=sacs', label: t('nav.bags') },
-    { to: '/boutique?categorie=parfums', label: t('nav.perfumes') },
-    { to: '/suivi', label: t('nav.track') },
-    { to: '/contact', label: t('nav.contact') },
-  ];
-
   useEffect(() => {
     const saved = localStorage.getItem('theme');
     const preferred = saved || (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -75,33 +65,34 @@ export default function Header() {
 
   return (
     <>
-      <div className="announce-bar">
-        <span>{t('announce.freeShipping', { amount: formatPrice(SHOP.freeShippingFrom) })}</span>
-        <span aria-hidden="true">·</span>
-        <span>{t('announce.payments')}</span>
-      </div>
+
 
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container header-inner">
           <Link to="/" className="brand" aria-label="Mojo Malado, accueil">
-            <img src="/logo-modjo.jpg" alt="" className="brand-mark" />
-            <span className="brand-text">
-              <span className="brand-name">Mojo Malado</span>
-              <span className="brand-tagline">Own your roots</span>
-            </span>
+            <span className="brand-name">MOJO MALADO</span>
           </Link>
 
           <nav className="main-nav" aria-label="Navigation principale">
-            {LINKS.slice(0, 5).map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`nav-link ${isCurrent(link, location) ? 'active' : ''}`}
-                aria-current={isCurrent(link, location) ? 'page' : undefined}
-              >
-                {link.label}
+            <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
+              ACCUEIL
+            </Link>
+            
+            <div className="nav-dropdown">
+              <Link to="/boutique" className={`nav-link ${location.pathname.startsWith('/boutique') ? 'active' : ''}`}>
+                Collections <i className="fas fa-chevron-down" style={{ fontSize: '0.75em', marginLeft: '4px' }} />
               </Link>
-            ))}
+              <div className="nav-dropdown-content">
+                <Link to="/boutique?categorie=vetements">Vêtements</Link>
+                <Link to="/boutique?categorie=sacs">Sacs</Link>
+                <Link to="/boutique?categorie=parfums">Parfums</Link>
+                <Link to="/boutique?categorie=sandales">Sandales</Link>
+              </div>
+            </div>
+
+            <Link to="/a-propos" className={`nav-link ${location.pathname === '/a-propos' ? 'active' : ''}`}>
+              À PROPOS
+            </Link>
           </nav>
 
           <div className="header-actions">
@@ -113,11 +104,7 @@ export default function Header() {
               <i className={theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'} aria-hidden="true" />
             </button>
 
-            {getToken('admin') && (
-              <Link to="/gestion-mojo-privee" className="icon-btn" aria-label={t('nav.admin')} title={t('nav.admin')}>
-                <i className="fas fa-cog" aria-hidden="true" />
-              </Link>
-            )}
+
 
             <div className="account-menu-wrap">
               <button
@@ -183,12 +170,18 @@ export default function Header() {
       {menuOpen && (
         <div className="mobile-menu">
           <I18nSelectors isMobile={true} />
-          {LINKS.map((link) => (
-            <Link key={link.to} to={link.to}>
-              {link.label}
-              <i className="fas fa-arrow-right" aria-hidden="true" />
-            </Link>
-          ))}
+          <Link to="/">
+            ACCUEIL
+            <i className="fas fa-arrow-right" aria-hidden="true" />
+          </Link>
+          <Link to="/boutique">
+            Collections
+            <i className="fas fa-arrow-right" aria-hidden="true" />
+          </Link>
+          <Link to="/a-propos">
+            À PROPOS
+            <i className="fas fa-arrow-right" aria-hidden="true" />
+          </Link>
           <Link to={customer ? '/compte' : '/connexion'}>
             {customer ? t('nav.account') : t('nav.login')}
             <i className="fas fa-arrow-right" aria-hidden="true" />

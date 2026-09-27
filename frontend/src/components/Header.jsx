@@ -69,9 +69,9 @@ export default function Header() {
 
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container header-inner">
-          <Link to="/" className="brand" aria-label="Mojo Malado, accueil" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src="/images/M.png" alt="Logo Mojo Malado" style={{ height: '40px', borderRadius: '4px', objectFit: 'contain' }} />
-            <span className="brand-name">MOJO MALADO</span>
+          <Link to="/" className="brand" aria-label="Mojo Malado, accueil" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/images/M.png" alt="Logo Mojo Malado" style={{ height: '32px', borderRadius: '4px', objectFit: 'contain' }} />
+            <span className="brand-name" style={{ whiteSpace: 'nowrap', fontSize: 'clamp(1rem, 4vw, 1.25rem)' }}>MOJO MALADO</span>
           </Link>
 
           <nav className="main-nav" aria-label="Navigation principale">

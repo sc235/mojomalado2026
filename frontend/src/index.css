@@ -2277,3 +2277,62 @@ h1, h2, h3, h4 {
     gap: 1.5rem;
   }
 }
+
+/* =========================================================================
+   EDITORIAL RESPONSIVE CLASSES (About page & general)
+   ========================================================================= */
+
+.editorial-hero {
+  padding: clamp(4rem, 8vw, 8rem) 0 clamp(2rem, 4vw, 4rem);
+  text-align: center;
+  border-bottom: none;
+}
+
+.editorial-hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+  margin: 1rem 0;
+}
+
+.editorial-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .editorial-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.editorial-dark-box {
+  background: var(--ink);
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  color: var(--ivory);
+  border-radius: 0;
+}
+
+.minimal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .minimal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .minimal-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+

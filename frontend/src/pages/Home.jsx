@@ -112,21 +112,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ---------------------------------------------------------- VALEURS */}
-      <div className="value-grid">
-        {[
-          { icon: 'fas fa-truck-fast', title: 'Livraison express', text: 'Dakar en 24h, partout au Sénégal en 48–72h.' },
-          { icon: 'fas fa-hand-holding-heart', title: 'Sélection à la main', text: 'Chaque pièce est choisie et vérifiée en boutique.' },
-          { icon: 'fas fa-shield-halved', title: 'Paiement sécurisé', text: 'Wave, Orange Money, carte bancaire ou à la livraison.' },
-          { icon: 'fas fa-box-open', title: 'Suivi de commande', text: 'Vous savez à tout moment où en est votre colis.' },
-        ].map((v) => (
-          <div className="value-item" key={v.title}>
-            <i className={v.icon} aria-hidden="true" />
-            <h3>{v.title}</h3>
-            <p>{v.text}</p>
-          </div>
-        ))}
-      </div>
 
       {/* ------------------------------------------------------- CATÉGORIES */}
       <section className="section">

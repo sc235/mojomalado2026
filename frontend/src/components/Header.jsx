@@ -97,8 +97,7 @@ export default function Header() {
           </nav>
 
           <div className="header-actions">
-            {/* Multi-language and Multi-currency selectors */}
-            <I18nSelectors />
+
 
             <button type="button" className="icon-btn" onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Thème clair' : 'Thème sombre'}>

@@ -2415,7 +2415,13 @@ h1, h2, h3, h4 {
   border-bottom: 2px solid var(--ink) !important;
   background: var(--ivory) !important;
 }
-.site-header a, .site-header .brand-name {
+.site-header a, 
+.site-header .brand-name, 
+.site-header button, 
+.site-header .icon-btn, 
+.site-header span, 
+.site-header i, 
+.site-header select {
   color: var(--ink) !important;
   font-weight: 600;
 }

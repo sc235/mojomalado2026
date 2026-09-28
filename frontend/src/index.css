@@ -4,7 +4,7 @@
    "Own your roots, Wear your culture"
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 /* -------------------------------------------------------------------------
    1. TOKENS
@@ -43,13 +43,13 @@
   --success:        #10B981;
   --danger:         #EF4444;
 
-  /* --- Rayons --- */
-  --radius-xs:  2px;
-  --radius-sm:  4px;
-  --radius-md:  8px;
-  --radius-lg:  16px;
-  --radius-xl:  24px;
-  --radius-full: 9999px;
+  /* --- Rayons (Brutalist = sharp corners) --- */
+  --radius-xs:  0px;
+  --radius-sm:  0px;
+  --radius-md:  0px;
+  --radius-lg:  0px;
+  --radius-xl:  0px;
+  --radius-full: 0px;
 
   /* --- Ombres (neutres, jamais colorées) --- */
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -66,8 +66,8 @@
   --transition-spring: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   /* --- Typo --- */
-  --font-display: 'Outfit', 'Montserrat', system-ui, sans-serif;
-  --font-body: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Helvetica Neue', system-ui, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
 
   /* --- Layout --- */
   --header-h: 76px;
@@ -2335,4 +2335,89 @@ h1, h2, h3, h4 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* =========================================================================
+   BRUTALIST E-COMMERCE OVERRIDES (Daustgov / Stickerboy style)
+   ========================================================================= */
+
+.btn {
+  border-radius: 0 !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  border: 2px solid var(--ink) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.btn-primary, .btn-solid, .btn:not(.btn-ghost) {
+  background-color: var(--ink) !important;
+  color: var(--ivory) !important;
+}
+
+.btn-primary:hover, .btn-solid:hover, .btn:not(.btn-ghost):hover {
+  background-color: var(--ivory) !important;
+  color: var(--ink) !important;
+}
+
+.btn-ghost {
+  background-color: transparent !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+}
+
+.btn-ghost:hover {
+  background-color: var(--ink) !important;
+  color: var(--ivory) !important;
+}
+
+/* Stark borders for products and categories */
+.product-card, .category-card {
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover, .category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0px var(--ink) !important;
+  border-color: var(--ink) !important;
+}
+
+.product-body, .category-body {
+  border-top: 1px solid var(--border-strong) !important;
+  background: var(--bg-alt);
+}
+
+.product-card:hover .product-body, .category-card:hover .category-body {
+  border-top-color: var(--ink) !important;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+/* Marquee harsh styling */
+.marquee {
+  border-top: 2px solid var(--ink) !important;
+  border-bottom: 2px solid var(--ink) !important;
+  background: var(--ivory) !important;
+  color: var(--ink) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Header borders */
+.site-header {
+  border-bottom: 2px solid var(--ink) !important;
+  background: var(--ivory) !important;
+}
+.site-header a, .site-header .brand-name {
+  color: var(--ink) !important;
+  font-weight: 600;
+}
+
 

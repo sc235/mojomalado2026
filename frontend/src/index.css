@@ -2433,4 +2433,79 @@ h1, h2, h3, h4 {
   font-weight: 700;
 }
 
+/* Brutalist Product Page Layout */
+.product-page {
+  border: 2px solid var(--ink) !important;
+  padding: 0 !important;
+  background: var(--bg-alt);
+}
+.product-page > div:last-child {
+  padding: 2rem !important;
+}
+
+.pd-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 900 !important;
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.04em !important;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pd-price {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem !important;
+}
+
+.option-block {
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.option-chip {
+  border-radius: 0 !important;
+  border: 2px solid var(--border-strong) !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+}
+.option-chip.active {
+  border-color: var(--ink) !important;
+  background: var(--ink) !important;
+  color: var(--ivory) !important;
+}
+
+/* Hard dividers in grids */
+.category-grid, .minimal-grid {
+  gap: 0 !important;
+  border-top: 2px solid var(--ink);
+  border-left: 2px solid var(--ink);
+}
+.product-card, .category-card {
+  border-right: 2px solid var(--ink) !important;
+  border-bottom: 2px solid var(--ink) !important;
+  border-top: none !important;
+  border-left: none !important;
+  box-shadow: none !important;
+}
+.product-card:hover, .category-card:hover {
+  transform: none !important;
+  background: var(--ink) !important;
+  color: var(--ivory) !important;
+}
+.product-card:hover .product-name a,
+.product-card:hover .product-price,
+.product-card:hover .product-cat,
+.category-card:hover h3,
+.category-card:hover p {
+  color: var(--ivory) !important;
+}
+
+
 

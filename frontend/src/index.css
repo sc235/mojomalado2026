@@ -2494,7 +2494,9 @@ h1, h2, h3, h4 {
   border-left: none !important;
   box-shadow: none !important;
 }
-.product-card:hover, .category-card:hover {
+.product-card:hover, .category-card:hover, 
+.product-card:hover .product-info, 
+.category-card:hover .category-body {
   transform: none !important;
   background: var(--ink) !important;
   color: var(--ivory) !important;
